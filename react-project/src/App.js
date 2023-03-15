@@ -1,11 +1,15 @@
 import './App.css';
-import FlipCard from './Components/cards/FlipCard';
+import Home from './Pages/Home';
+
+
+
 
 function App() {
   return (
     <div className="App">
       <h1>My first react project</h1>
-      <FlipCard />
+      <Home />
+
     </div>
   );
 }
