@@ -1,34 +1,172 @@
-import React, { useState, useEffect } from 'react'
+// import React, { useState, useEffect } from 'react'
+// import Cards from '../Components/Cards';
+// import Navbar from '../Components/Navbar'
+// import Search from '../Components/Search';
+
+// function Home() {
+//     let [pageNumber, setPageNumber] = useState(1);
+//     let [fetchData, setFetchData] = useState([]);
+//     let { info, results } = fetchData;
+
+
+//     let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`
+
+//     useEffect(() => {
+//         (async function () {
+//             let data = await fetch(api).then((res) => res.json());
+//             setFetchData(data);
+//         })();
+//     }, [api]);
+
+//     return (
+//         <div>
+//             <Navbar />
+//             <h1>Rick & Morty challange</h1>
+
+//             <div className="container">
+//                 <div className="row">
+//                     <div className="col-3"></div>
+//                 </div>
+//                 <div className="row">
+//                     {results &&
+//                         results.map((x) => {
+//                             let { id, name, image, location } = x;
+
+//                             return (
+//                                 <div key={id} className="col-md-3">
+//                                     <div className="">
+//                                         <img src={image} alt="" className="image-fluid" />
+//                                         <div className="fs-4 fw-bold mb-4">{name}</div>
+//                                         <div className=''>
+//                                             <div className='fs-6'>last location</div>
+//                                             <div className='fs-5'>{location.name}</div>
+//                                         </div>
+//                                     </div>
+//                                 </div>
+//                             );
+//                         })}
+//                     {!results && <div className="col">Not found</div>}
+//                 </div>
+//             </div>
+//             <Cards />
+//             <Search />
+//         </div>
+//     );
+// }
+
+
+// export default Home;
+
+
+// import React, { useState, useEffect } from 'react';
+// import Cards from '../Components/Cards';
+// import Navbar from '../Components/Navbar';
+// import Search from '../Components/Search';
+// // import './Home.css';
+
+// function Home() {
+//     const [pageNumber, setPageNumber] = useState(1);
+//     const [fetchData, setFetchData] = useState([]);
+//     const { info, results } = fetchData;
+
+//     const api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`;
+
+//     useEffect(() => {
+//         async function fetchCharacters() {
+//             const data = await fetch(api).then((res) => res.json());
+//             console.log(data)
+//             setFetchData(data);
+//         }
+//         fetchCharacters();
+//     }, [api]);
+
+//     return (
+//         <div>
+//             <Navbar />
+//             <h1>Rick & Morty Challenge</h1>
+//             <Search />
+//             <Cards />
+//             <div className="container">
+//                 <div className="row">
+//                     {results &&
+//                         results.map((character) => (
+//                             <div key={character.id} className="col-md-3">
+//                                 <div className="flip-card">
+//                                     <div className="flip-card-inner">
+//                                         <div className="flip-card-front">
+//                                             <img src={character.image} alt="" className="image-fluid" />
+//                                         </div>
+//                                         <div className="flip-card-back">
+//                                             <div className="fs-4 fw-bold mb-4">{character.name}</div>
+//                                             <div className="fs-6">Last Location:</div>
+//                                             <div className="fs-5">{character.location.name}</div>
+//                                         </div>
+//                                     </div>
+//                                 </div>
+//                             </div>
+//                         ))}
+//                     {/* {!results && <div className="col">Not found</div>} */}
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
+
+// export default Home;
+
+import React, { useState, useEffect } from 'react';
 import Cards from '../Components/Cards';
-import Navbar from '../Components/Navbar'
+import Navbar from '../Components/Navbar';
 import Search from '../Components/Search';
+// import './Home.css';
 
 function Home() {
-    let [pageNumber, setPageNumber] = useState(1);
-    let [fetchData, updateFetchData] = useState([]);
-    let { info, results } = fetchData;
+    const [pageNumber, setPageNumber] = useState(1);
+    const [fetchData, setFetchData] = useState([]);
+    const { info, results } = fetchData;
 
-    let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`
+    const api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`;
 
     useEffect(() => {
-        (async function () {
-            let data = await fetch(api).then((res) => res.json());
-            updateFetchData(data);
-        })();
+        async function fetchCharacters() {
+            const data = await fetch(api).then((res) => res.json());
+            setFetchData(data);
+            console.log(data);
+        }
+        fetchCharacters();
     }, [api]);
 
     return (
         <div>
             <Navbar />
-            <h1>Ricky & Morty challange</h1>
+            <h1>Rick & Morty Challenge</h1>
             <Search />
             <Cards results={results} />
-            <h2>Search</h2>
-            <h2>content</h2>
+            {info && (
+                <div className="pagination-container">
+                    <button
+                        className="pagination-button"
+                        disabled={pageNumber === 1}
+                        onClick={() => setPageNumber((prev) => prev - 1)}>
 
+                        Previous
+                    </button>
 
+                    <span className="pagination-page">
+                        Page {pageNumber} of {info.pages}
+                    </span>
+                    <button
+                        className="pagination-button"
+                        disabled={pageNumber === info.pages}
+                        onClick={() => setPageNumber((prev) => prev + 1)}>
 
+                        Next
+                    </button>
+                </div>
+            )}
         </div>
-    )
+    );
 }
+
 export default Home;
+
