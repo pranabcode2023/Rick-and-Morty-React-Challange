@@ -89,9 +89,10 @@ const Cards = ({ results }) => {
                 </div>
             </div>
         ));
-    } else {
-        // display = <div>Not found</div>;  ???????????
     }
+    // else {
+    //     // display = <div>Not found</div>;  ////???????????
+    // }
 
     return <div className="container"><div className="row">{display}</div></div>;        ////????????????????
 };

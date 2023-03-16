@@ -114,41 +114,135 @@
 
 // export default Home;
 
+// import React, { useState, useEffect } from 'react';
+// import Cards from '../Components/Cards';
+// import Cards2 from '../Components/Cards2';
+
+// import Navbar from '../Components/Navbar';
+// import Search from '../Components/Search';
+// // import './Home.css';
+
+// function Home() {
+//     const [pageNumber, setPageNumber] = useState(1);
+//     const [fetchData, setFetchData] = useState([]);
+//     const [error, setError] = useState(false)
+//     const { info, results } = fetchData;
+
+//     const api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`;
+
+//     useEffect(() => {
+//         async function fetchCharacters() {
+//             try {
+
+//                 const data = await fetch(api).then((res) => res.json());
+//                 setFetchData(data);
+//                 if (data) { setError(false) }
+//                 console.log(data);
+
+//             } catch {
+//                 console.log('error')
+//                 setError('something went wrong')
+//             }
+
+//         }
+//         fetchCharacters();
+//     }, [api]);
+
+//     return (
+//         <div>
+//             <Navbar />
+//             <h1>Rick & Morty Challenge</h1>
+//             <Search />
+//             {error && (<p>{error}</p>)}
+
+//             {/* <Cards results={results} /> */}
+//             <Cards2 results={results} />
+
+
+//             {info && (
+//                 <div className="pagination-container">
+//                     <button
+//                         className="pagination-button"
+//                         disabled={pageNumber === 1}
+//                         onClick={() => setPageNumber((prev) => prev - 1)}>
+
+//                         Previous
+//                     </button>
+
+//                     <span className="pagination-page">
+//                         Page {pageNumber} of {info.pages}
+//                     </span>
+//                     <button
+//                         className="pagination-button"
+//                         disabled={pageNumber === info.pages}
+//                         onClick={() => setPageNumber((prev) => prev + 1)}>
+
+//                         Next
+//                     </button>
+//                 </div>
+//             )}
+//         </div>
+//     );
+// }
+
+// export default Home;
+
+
 import React, { useState, useEffect } from 'react';
-import Cards from '../Components/Cards';
+// import Cards from '../Components/Cards';
+import Cards2 from '../Components/Cards2';
 import Navbar from '../Components/Navbar';
 import Search from '../Components/Search';
-// import './Home.css';
 
 function Home() {
     const [pageNumber, setPageNumber] = useState(1);
     const [fetchData, setFetchData] = useState([]);
+    const [error, setError] = useState(false);
     const { info, results } = fetchData;
 
     const api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`;
+    const [searchInput, setSearchInput] = useState('');
+    const [filteredResults, setFilteredResults] = useState([]);
 
     useEffect(() => {
         async function fetchCharacters() {
-            const data = await fetch(api).then((res) => res.json());
-            setFetchData(data);
-            console.log(data);
+            try {
+                const data = await fetch(api).then((res) => res.json());
+                setFetchData(data);
+                if (data) { setError(false) }
+                console.log(data);
+            } catch {
+                console.log('error')
+                setError('something went wrong')
+            }
         }
         fetchCharacters();
     }, [api]);
+
+    const updateResults = (input) => {
+        const filteredResults = results.filter(result =>
+            result.name.toLowerCase().includes(input.toLowerCase())
+        );
+        setFilteredResults(filteredResults);
+    };
 
     return (
         <div>
             <Navbar />
             <h1>Rick & Morty Challenge</h1>
-            <Search />
-            <Cards results={results} />
+            <Search searchInput={searchInput} setSearchInput={setSearchInput} updateResults={updateResults} />
+            <Cards2 results={searchInput ? filteredResults : results} />
+
+            {error && (<p>{error}</p>)}
+
+
+
             {info && (
                 <div className="pagination-container">
                     <button
                         className="pagination-button"
                         disabled={pageNumber === 1}
                         onClick={() => setPageNumber((prev) => prev - 1)}>
-
                         Previous
                     </button>
 
@@ -159,7 +253,6 @@ function Home() {
                         className="pagination-button"
                         disabled={pageNumber === info.pages}
                         onClick={() => setPageNumber((prev) => prev + 1)}>
-
                         Next
                     </button>
                 </div>
@@ -169,4 +262,3 @@ function Home() {
 }
 
 export default Home;
-
