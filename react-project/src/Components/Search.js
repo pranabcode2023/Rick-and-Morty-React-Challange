@@ -29,21 +29,33 @@
 
 // export default RickAndMortySearch;
 
-import React from 'react';
+// import React from 'react';
 
-function Search({ searchInput, setSearchInput, updateResults }) {
-    const inputChange = (event) => {
-        setSearchInput(event.target.value);
-        updateResults(event.target.value);
-    };
+// function Search({ searchInput, setSearchInput, updateResults }) {
+//     const inputChange = (event) => {
+//         setSearchInput(event.target.value);
+//         updateResults(event.target.value);
+//     };
 
+//     return (
+//         <form>
+//             <input type="text" value={searchInput} onChange={inputChange} />
+//             <button onClick={updateResults}>Search</button>
+//         </form>
+//     );
+// }
+
+// export default Search;
+import React from 'react'
+
+const Search = () => {
     return (
         <div>
-            <input type="text" value={searchInput} onChange={inputChange} />
-            <button onClick={updateResults}>Search</button>
+
         </div>
-    );
+    )
 }
 
-export default Search;
+export default Search
+
 

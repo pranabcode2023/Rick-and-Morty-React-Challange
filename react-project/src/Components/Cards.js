@@ -1,39 +1,3 @@
-// import React from 'react'
-
-// const Cards = ({ results }) => {
-
-//     let display;
-
-//     if (results) {
-//         display = results.map((x) => {
-//             let { id, name, image, location } = x;
-
-//             return (
-//                 <div key={id} className="col-4">
-//                     <div className="">
-//                         <img src={image} alt="" className="image-fluid" />
-//                         <div className="fs-4 fw-bold mb-4">{name}</div>
-//                         <div className=''>
-//                             <div className='fs-6'>last location</div>
-//                             <div className='fs-5'>{location.name}</div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             );
-//         });
-//     }
-//     else {
-//         display = "Not found";
-//     }
-
-//     console.log(results);
-//     return (
-//         <div>{display}</div>
-//     )
-// }
-
-// export default Cards
-
 // import React from 'react';
 // // import './Cards.css';
 
@@ -42,59 +6,102 @@
 
 //     if (results) {
 //         display = results.map((character) => (
-//             <div key={character.id} className="col-4">
-//                 <div className="flip-card">
-//                     <div className="flip-card-inner">
-//                         <div className="flip-card-front">
-//                             <img src={character.image} alt="" className="image-fluid" />
-//                         </div>
-//                         <div className="flip-card-back">
-//                             <div className="fs-4 fw-bold mb-4">{character.name}</div>
-//                             <div className="fs-6">Last Location:</div>
-//                             <div className="fs-5">{character.location.name}</div>
+//             <div className="cardsContainer">
+//                 <div key={character.id} >
+//                     <div className="flip-card">
+//                         <div className="flip-card-inner">
+//                             <div className="flip-card-front">
+//                                 <img src={character.image} alt="" className="image-fluid" />
+//                             </div>
+//                             <div className="flip-card-back">
+//                                 <div className="fs-4 fw-bold mb-4">{character.name}</div>
+//                                 <div className="fs-6">Last Location:</div>
+//                                 <div className="fs-5">{character.location.name}</div>
+//                             </div>
 //                         </div>
 //                     </div>
 //                 </div>
 //             </div>
 //         ));
-//     } else {
-//         // display = <div>Not found</div>;
 //     }
+//     // else {
+//     //     // display = <div>Not found</div>;  ////???????????
+//     // }
 
-//     return <div className="container">{display}</div>;
+//     return (
+//         <div className="container"><div className="row">{display}</div></div>
+//     );        ////????????????????
 // };
 
 // export default Cards;
 
+
+
 import React from 'react';
-// import './Cards.css';
+
 
 const Cards = ({ results }) => {
-    let display;
-
-    if (results) {
-        display = results.map((character) => (
-            <div key={character.id} className="col-md-3">
-                <div className="flip-card">
-                    <div className="flip-card-inner">
-                        <div className="flip-card-front">
-                            <img src={character.image} alt="" className="image-fluid" />
-                        </div>
-                        <div className="flip-card-back">
-                            <div className="fs-4 fw-bold mb-4">{character.name}</div>
-                            <div className="fs-6">Last Location:</div>
-                            <div className="fs-5">{character.location.name}</div>
+    return (
+        <div className="cardsContainer">
+            {results && results.map((character) => (
+                <div key={character.id}>
+                    <div className="flip-card">
+                        <div className="flip-card-inner">
+                            <div className="flip-card-front">
+                                <img src={character.image} alt="" className="image-fluid" />
+                            </div>
+                            <div className="flip-card-back">
+                                <div className="fs-4 fw-bold mb-4">{character.name}</div>
+                                <div className="fs-6">Last Location:</div>
+                                <div className="fs-5">{character.location.name}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        ));
-    }
-    // else {
-    //     // display = <div>Not found</div>;  ////???????????
-    // }
-
-    return <div className="container"><div className="row">{display}</div></div>;        ////????????????????
+            ))}
+        </div>
+    );
 };
 
 export default Cards;
+
+
+
+//++++++++++++++++++++++++ explanation for this code+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+// This is a React functional component called Cards that takes a prop called results.
+
+// Inside the component, a div with class name "container" is created and inside it, there is another div with
+// class name "cardsContainer".This div contains a mapping over the results array prop to render a set of cards
+// based on the data passed in.
+
+// For each item in results, a div with a flip - card class is created.This class is used to create a flip card effect
+//  where the front of the card displays an image of the character and the back of the card displays additional information
+//  about the character.
+
+// The key attribute is set to the character object's id property to uniquely identify each card.
+
+// Inside the flip - card div, there is another div with the class flip-card - inner.This inner div is used
+// to create the flip animation.Inside this div, there are two more divs: flip - card - front and flip - card - back.
+
+// The flip - card - front div contains an img element with the src attribute set to the character object's image property,
+// and the alt attribute set to an empty string.
+
+// The flip - card - back div contains a div element with the classes fs - 4 fw - bold mb - 4, displaying the character's
+// name in a larger font size with bold text.Below that, there is another div element with the class fs-6 displaying the
+// text "Last Location:", followed by another div element with the class fs-5, displaying the character's last location.
+
+// If the results prop is falsy, meaning that it is undefined, null, or an empty array, no cards will be rendered.
+
+//     Finally, the Cards component is exported as the default export of this module so that it can be imported and used
+//         in other parts of the application.
+
+
+
+
+
+
+
+

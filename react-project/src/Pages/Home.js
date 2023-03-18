@@ -1,162 +1,52 @@
-// import React, { useState, useEffect } from 'react'
-// import Cards from '../Components/Cards';
-// import Navbar from '../Components/Navbar'
-// import Search from '../Components/Search';
-
-// function Home() {
-//     let [pageNumber, setPageNumber] = useState(1);
-//     let [fetchData, setFetchData] = useState([]);
-//     let { info, results } = fetchData;
-
-
-//     let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`
-
-//     useEffect(() => {
-//         (async function () {
-//             let data = await fetch(api).then((res) => res.json());
-//             setFetchData(data);
-//         })();
-//     }, [api]);
-
-//     return (
-//         <div>
-//             <Navbar />
-//             <h1>Rick & Morty challange</h1>
-
-//             <div className="container">
-//                 <div className="row">
-//                     <div className="col-3"></div>
-//                 </div>
-//                 <div className="row">
-//                     {results &&
-//                         results.map((x) => {
-//                             let { id, name, image, location } = x;
-
-//                             return (
-//                                 <div key={id} className="col-md-3">
-//                                     <div className="">
-//                                         <img src={image} alt="" className="image-fluid" />
-//                                         <div className="fs-4 fw-bold mb-4">{name}</div>
-//                                         <div className=''>
-//                                             <div className='fs-6'>last location</div>
-//                                             <div className='fs-5'>{location.name}</div>
-//                                         </div>
-//                                     </div>
-//                                 </div>
-//                             );
-//                         })}
-//                     {!results && <div className="col">Not found</div>}
-//                 </div>
-//             </div>
-//             <Cards />
-//             <Search />
-//         </div>
-//     );
-// }
-
-
-// export default Home;
-
-
 // import React, { useState, useEffect } from 'react';
-// import Cards from '../Components/Cards';
+// // import Cards from '../Components/Cards';
 // import Navbar from '../Components/Navbar';
 // import Search from '../Components/Search';
-// // import './Home.css';
+// import Cards from '../Components/Cards2';
+
+
 
 // function Home() {
 //     const [pageNumber, setPageNumber] = useState(1);
 //     const [fetchData, setFetchData] = useState([]);
+//     const [error, setError] = useState(false);
 //     const { info, results } = fetchData;
 
 //     const api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`;
-
-//     useEffect(() => {
-//         async function fetchCharacters() {
-//             const data = await fetch(api).then((res) => res.json());
-//             console.log(data)
-//             setFetchData(data);
-//         }
-//         fetchCharacters();
-//     }, [api]);
-
-//     return (
-//         <div>
-//             <Navbar />
-//             <h1>Rick & Morty Challenge</h1>
-//             <Search />
-//             <Cards />
-//             <div className="container">
-//                 <div className="row">
-//                     {results &&
-//                         results.map((character) => (
-//                             <div key={character.id} className="col-md-3">
-//                                 <div className="flip-card">
-//                                     <div className="flip-card-inner">
-//                                         <div className="flip-card-front">
-//                                             <img src={character.image} alt="" className="image-fluid" />
-//                                         </div>
-//                                         <div className="flip-card-back">
-//                                             <div className="fs-4 fw-bold mb-4">{character.name}</div>
-//                                             <div className="fs-6">Last Location:</div>
-//                                             <div className="fs-5">{character.location.name}</div>
-//                                         </div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         ))}
-//                     {/* {!results && <div className="col">Not found</div>} */}
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default Home;
-
-// import React, { useState, useEffect } from 'react';
-// import Cards from '../Components/Cards';
-// import Cards2 from '../Components/Cards2';
-
-// import Navbar from '../Components/Navbar';
-// import Search from '../Components/Search';
-// // import './Home.css';
-
-// function Home() {
-//     const [pageNumber, setPageNumber] = useState(1);
-//     const [fetchData, setFetchData] = useState([]);
-//     const [error, setError] = useState(false)
-//     const { info, results } = fetchData;
-
-//     const api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`;
+//     const [searchInput, setSearchInput] = useState('');
+//     const [filteredResults, setFilteredResults] = useState([]);
 
 //     useEffect(() => {
 //         async function fetchCharacters() {
 //             try {
-
 //                 const data = await fetch(api).then((res) => res.json());
 //                 setFetchData(data);
 //                 if (data) { setError(false) }
 //                 console.log(data);
-
 //             } catch {
 //                 console.log('error')
 //                 setError('something went wrong')
 //             }
-
 //         }
 //         fetchCharacters();
 //     }, [api]);
+
+//     const updateResults = (input) => {
+//         const filteredResults = results.filter(result =>
+//             result.name.toLowerCase().includes(input.toLowerCase())
+//         );
+//         setFilteredResults(filteredResults);
+//     };
 
 //     return (
 //         <div>
 //             <Navbar />
 //             <h1>Rick & Morty Challenge</h1>
-//             <Search />
+//             <Search searchInput={searchInput} setSearchInput={setSearchInput} updateResults={updateResults} />
+//             <Cards results={searchInput ? filteredResults : results} />
+
 //             {error && (<p>{error}</p>)}
 
-//             {/* <Cards results={results} /> */}
-//             <Cards2 results={results} />
 
 
 //             {info && (
@@ -165,7 +55,6 @@
 //                         className="pagination-button"
 //                         disabled={pageNumber === 1}
 //                         onClick={() => setPageNumber((prev) => prev - 1)}>
-
 //                         Previous
 //                     </button>
 
@@ -176,7 +65,75 @@
 //                         className="pagination-button"
 //                         disabled={pageNumber === info.pages}
 //                         onClick={() => setPageNumber((prev) => prev + 1)}>
+//                         Next
+//                     </button>
+//                 </div>
+//             )}
+//         </div>
+//     );
+// }
 
+// export default Home;
+
+
+
+// import React, { useState, useEffect } from 'react';
+// import Navbar from '../Components/Navbar';
+// import Search from '../Components/Search';
+// import Cards from '../Components/Cards2';
+
+// function Home() {
+//     const [pageNumber, setPageNumber] = useState(1);
+//     const [fetchData, setFetchData] = useState([]);
+//     const [error, setError] = useState(false);
+//     const { info, results } = fetchData;
+
+//     const api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`;
+//     const [searchInput, setSearchInput] = useState('');
+//     const [filteredResults, setFilteredResults] = useState([]);
+
+//     useEffect(() => {
+//         async function fetchCharacters() {
+//             try {
+//                 const data = await fetch(api).then((res) => res.json());
+//                 setFetchData(data);
+//                 if (data) {
+//                     setError(false);
+//                 }
+//                 console.log(data);
+//             } catch {
+//                 console.log('error');
+//                 setError('something went wrong');
+//             }
+//         }
+//         fetchCharacters();
+//     }, [api]);
+
+//     const updateResults = (input) => {
+//         const filteredResults = results.filter((result) =>
+//             result.name.toLowerCase().includes(input.toLowerCase())
+//         );
+//         setFilteredResults(filteredResults);
+//     };
+
+//     return (
+//         <div>
+//             <Navbar searchInput={searchInput} setSearchInput={setSearchInput} updateResults={updateResults} />
+//             <h1>Rick & Morty Challenge</h1>
+//             <Cards results={searchInput ? filteredResults : results} />
+
+//             {error && <p>{error}</p>}
+
+//             {info && (
+//                 <div className="pagination-container">
+//                     <button className="pagination-button" disabled={pageNumber === 1} onClick={() => setPageNumber((prev) => prev - 1)}>
+//                         Previous
+//                     </button>
+
+//                     <span className="pagination-page">
+//                         Page {pageNumber} of {info.pages}
+//                     </span>
+//                     <button className="pagination-button" disabled={pageNumber === info.pages} onClick={() => setPageNumber((prev) => prev + 1)}>
 //                         Next
 //                     </button>
 //                 </div>
@@ -189,10 +146,7 @@
 
 
 import React, { useState, useEffect } from 'react';
-// import Cards from '../Components/Cards';
-import Cards2 from '../Components/Cards2';
-import Navbar from '../Components/Navbar';
-import Search from '../Components/Search';
+import Cards from '../Components/Cards';
 
 function Home() {
     const [pageNumber, setPageNumber] = useState(1);
@@ -209,18 +163,20 @@ function Home() {
             try {
                 const data = await fetch(api).then((res) => res.json());
                 setFetchData(data);
-                if (data) { setError(false) }
+                if (data) {
+                    setError(false);
+                }
                 console.log(data);
             } catch {
-                console.log('error')
-                setError('something went wrong')
+                console.log('error');
+                setError('something went wrong');
             }
         }
         fetchCharacters();
     }, [api]);
 
     const updateResults = (input) => {
-        const filteredResults = results.filter(result =>
+        const filteredResults = results.filter((result) =>
             result.name.toLowerCase().includes(input.toLowerCase())
         );
         setFilteredResults(filteredResults);
@@ -228,31 +184,26 @@ function Home() {
 
     return (
         <div>
-            <Navbar />
-            <h1>Rick & Morty Challenge</h1>
-            <Search searchInput={searchInput} setSearchInput={setSearchInput} updateResults={updateResults} />
-            <Cards2 results={searchInput ? filteredResults : results} />
+            <nav>
 
-            {error && (<p>{error}</p>)}
+                <input type="text" value={searchInput} onChange={(event) => {
+                    setSearchInput(event.target.value);
+                    updateResults(event.target.value);
+                }} />
+                <button onClick={() => updateResults(searchInput)}>Search</button>
+            </nav>
 
-
-
+            {error && <p>{error}</p>}
+            <Cards results={searchInput ? filteredResults : results} />
             {info && (
                 <div className="pagination-container">
-                    <button
-                        className="pagination-button"
-                        disabled={pageNumber === 1}
-                        onClick={() => setPageNumber((prev) => prev - 1)}>
+                    <button className="pagination-button" disabled={pageNumber === 1} onClick={() => setPageNumber((prev) => prev - 1)}>
                         Previous
                     </button>
-
                     <span className="pagination-page">
                         Page {pageNumber} of {info.pages}
                     </span>
-                    <button
-                        className="pagination-button"
-                        disabled={pageNumber === info.pages}
-                        onClick={() => setPageNumber((prev) => prev + 1)}>
+                    <button className="pagination-button" disabled={pageNumber === info.pages} onClick={() => setPageNumber((prev) => prev + 1)}>
                         Next
                     </button>
                 </div>
@@ -262,3 +213,33 @@ function Home() {
 }
 
 export default Home;
+
+
+
+
+// This is a React component called Home.It imports several other components from files
+// located in the "../Components" directory: Cards2, Navbar, and Search.
+
+// The component uses several state variables that are created using the useState hook:
+
+// pageNumber: a number representing the current page of data to fetch from an API.
+//     fetchData: an object representing the data fetched from the API, containing an info
+// property(object) and a results property(array).
+//         error: a boolean value indicating whether an error occurred while fetching data.
+//             searchInput: a string representing the user's input in a search field.
+// filteredResults: an array of objects representing the results filtered based on the user's search input.
+// The component also uses the useEffect hook to fetch data from the Rick and Morty API when the component mounts
+//  or the api variable(created based on the current pageNumber) changes.
+
+// The updateResults function is used to update the filteredResults state based on the user's search input.
+
+// In the component's return statement, the Navbar and h1 components are rendered, followed by the Search component with
+// its searchInput, setSearchInput, and updateResults props.The Cards2 component is then rendered,
+//  with its results prop set to either filteredResults(if searchInput is truthy) or results(if searchInput is falsy).
+
+// If an error occurs while fetching data, a p element displaying the error message is rendered.
+
+//     Finally, if info is truthy(indicating that data has been fetched), a pagination section is rendered,
+// allowing the user to navigate through the pages of data.
+
+
