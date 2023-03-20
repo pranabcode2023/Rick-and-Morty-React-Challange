@@ -1,6 +1,7 @@
 .App {
   text-align: center;
 }
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -18,16 +19,34 @@
 
 /* +++++++++++++++++++++++++++ Navbar +++++++++++++++++++++ */
 
+h1{
+  color: bisque;
+}
+ 
+
+h2{
+  color: bisque;
+ }
 nav {
   display: block;
   border: 2px solid #ddd;
   box-shadow:rgb(168, 72, 72);
-  padding: 30px;
+  padding: 15px;
   background-color: rgb(168, 72, 72);
-  margin-bottom: 0.8rem;
+  margin-bottom: 1.5rem;
 
 }
 
+
+input{
+  border-radius: 9rem;
+  padding: 8px;
+  border: 2px solid white;
+}
+/* .searchBtn{
+  border-radius:9rem;
+  padding: 5px;
+} */
 
 
 /* ************body*************** */
@@ -196,24 +215,27 @@ the box on hover (remove perspective if you don't want the 3D effect */
 
 /* **************modal**************** */
 
-/* 
-.modal {
+ .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
+ 
 }
 
 .modal-content {
   background-color: white;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px red;
+  
+ 
 }
 
 .modal-header {
@@ -221,17 +243,62 @@ the box on hover (remove perspective if you don't want the 3D effect */
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+ 
 }
 
-.modal-header h2 {
-  margin: 0;
-}
 
-.modal-header img {
-  width: 100px;
-  height: 100px;
+.modal-body img {
   border-radius: 50%;
+  border: 2px solid bisque;
   object-fit: cover;
   margin-left: 20px;
-} */
+  width: 300px;
+  height: 300px;
+ } 
 
+  
+
+
+
+
+ /* Modal styling */
+  /* .modal-header {
+   background-color: #343a40;
+   color: #fff;
+ }
+
+ .modal-title {
+   font-size: 1.5rem;
+ }
+
+ .modal-body {
+   text-align: center;
+ }
+
+ .modal-body img {
+   max-width: 50%;
+   height: auto;
+ }
+
+ .modal-body div {
+   margin-bottom: 10px;
+ }
+
+ .modal-body div strong {
+   margin-right: 5px;
+ }
+
+ .modal-footer {
+   justify-content: center;
+   border-top: none;
+ }
+
+ .modal-footer button {
+   background-color: #343a40;
+   color: #fff;
+   border: none;
+ }
+
+ .modal-footer button:hover {
+   background-color: #2f343a;
+ }  */

@@ -37,10 +37,52 @@
 
 
 
-import React from 'react';
+// import React from 'react';
 
+
+// const Cards = ({ results }) => {
+//     return (
+//         <div className="cardsContainer">
+//             {results && results.map((character) => (
+//                 <div key={character.id}>
+//                     <div className="flip-card">
+//                         <div className="flip-card-inner">
+//                             <div className="flip-card-front">
+//                                 <img src={character.image} alt="" className="image-fluid" />
+//                             </div>
+//                             <div className="flip-card-back">
+//                                 <div className="fs-4 fw-bold mb-4">{character.name}</div>
+//                                 <div className="fs-6">Last Location:</div>
+//                                 <div className="fs-5">{character.location.name}</div>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </div>
+//             ))}
+//         </div>
+//     );
+// };
+
+// export default Cards;
+
+
+import React, { useState } from 'react';
+import { Button, Modal } from 'react-bootstrap';
 
 const Cards = ({ results }) => {
+    const [showModal, setShowModal] = useState(false);
+    const [selectedCharacter, setSelectedCharacter] = useState(null);
+
+    const handleShowModal = (character) => {
+        setSelectedCharacter(character);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedCharacter(null);
+        setShowModal(false);
+    };
+
     return (
         <div className="cardsContainer">
             {results && results.map((character) => (
@@ -54,11 +96,31 @@ const Cards = ({ results }) => {
                                 <div className="fs-4 fw-bold mb-4">{character.name}</div>
                                 <div className="fs-6">Last Location:</div>
                                 <div className="fs-5">{character.location.name}</div>
+                                <Button onClick={() => handleShowModal(character)}>Read More</Button>
                             </div>
                         </div>
                     </div>
                 </div>
             ))}
+            {selectedCharacter && (
+                <div className="modal">
+                    <Modal show={showModal} onHide={handleCloseModal} backdrop="static" keyboard={false}>
+                        <Modal.Header closeButton>
+                            <Modal.Title><h2>{selectedCharacter.name}</h2></Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <img src={selectedCharacter.image} alt="" className="image-fluid mb-4" />
+                            <div><strong>species:</strong> {selectedCharacter.species}</div>
+                            <div><strong>gender:</strong> {selectedCharacter.gender}</div>
+                            <div><strong>Status:</strong> {selectedCharacter.status}</div>
+                            <div><strong>Location:</strong> {selectedCharacter.location.name}</div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
+            )}
         </div>
     );
 };

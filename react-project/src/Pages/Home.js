@@ -148,6 +148,8 @@
 import React, { useState, useEffect } from 'react';
 import Cards from '../Components/Cards';
 
+
+
 function Home() {
     const [pageNumber, setPageNumber] = useState(1);
     const [fetchData, setFetchData] = useState([]);
@@ -185,12 +187,13 @@ function Home() {
     return (
         <div>
             <nav>
+                <h1>Rick & Morty</h1>
+                <input placeholder='Search' type="text" value={searchInput} onChange={(event) => {
 
-                <input type="text" value={searchInput} onChange={(event) => {
                     setSearchInput(event.target.value);
                     updateResults(event.target.value);
                 }} />
-                <button onClick={() => updateResults(searchInput)}>Search</button>
+                {/* <button className="searchBtn" onClick={() => updateResults(searchInput)}>Search</button> */}
             </nav>
 
             {error && <p>{error}</p>}
