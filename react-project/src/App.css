@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -16,6 +17,19 @@
 .App-link {
   color: #61dafb;
 }
+
+/* ******************logo****************** */
+
+
+.Logo img {
+width: 30%;
+padding: 0.2rem;
+border-radius: 2rem;
+ /* border: 2px solid red; */
+}
+
+
+
 
 /* +++++++++++++++++++++++++++ Navbar +++++++++++++++++++++ */
 
@@ -111,6 +125,7 @@ input{
   width: 100%;
   border: 2px solid #ddd;
   box-shadow: rgb(168, 72, 72);
+
  }
  
 /* The flip card container - set the width and height to whatever you want. 
@@ -302,3 +317,6 @@ the box on hover (remove perspective if you don't want the 3D effect */
  .modal-footer button:hover {
    background-color: #2f343a;
  }  */
+
+
+ 

@@ -187,9 +187,12 @@ function Home() {
     return (
         <div>
             <nav>
-                <h1>Rick & Morty</h1>
+                <div className="Logo">
+                    <img src="../images/logo.png" alt="logo" />
+                </div>
+                <br /><br />
+                {/* <h1>Rick & Morty</h1> */}
                 <input placeholder='Search' type="text" value={searchInput} onChange={(event) => {
-
                     setSearchInput(event.target.value);
                     updateResults(event.target.value);
                 }} />
