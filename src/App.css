@@ -76,7 +76,7 @@ input{
  
  /* row is a card container */
  .cardsContainer {
-   /* border: 2px red solid; */
+   border: 2px red solid;
    display: flex;
    flex-wrap: wrap;
    gap: 40px;
